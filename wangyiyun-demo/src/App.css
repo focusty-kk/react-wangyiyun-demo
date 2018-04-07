@@ -1,5 +1,20 @@
+@import "../node_modules/normalize.css/normalize.css";
+
+html,body{
+  font-size: 62.5%;
+  margin: 0;
+  font-family: svgFont;
+}
+@font-face {
+  font-family: 'svgFont';
+  src: url('asseat/font/iconfont.ttf');/*IE*/
+  src:url('asseat/font/iconfont.ttf'), url('asseat/font/iconfont.ttf');/*non-IE*/
+}
+ul li{
+  list-style: none;
+}
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
