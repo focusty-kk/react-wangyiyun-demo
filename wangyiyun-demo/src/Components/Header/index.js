@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import {Icon} from 'antd-mobile'
-//import 'antd-mobile/dist/'
-import 'antd-mobile/dist/antd-mobile.css'
+import {Icon} from 'antd'
 
-import './Header.css'
+require("./Header.css");
+
 class Header extends Component {
     constructor(props) {
         super(props)
@@ -16,12 +15,14 @@ class Header extends Component {
         return (
             <div className="Header">
                 <div>
-                    <Icon type="cross-circle" className="icon-bg" size="xxs" color="yellow" />
-                    <Icon type="cross-circle" size="xxs" color="yellow" />
-                    <Icon type="down-circle" size="xxs" color="yellow" />
+                    <a href="">111</a>
+                    <Icon type="cross-circle" className="icon-bg" size="xxs" color="yellow"/>
+                    <Icon type="cross-circle" size="xxs" color="yellow"/>
+                    <Icon type="down-circle" size="xxs" color="yellow"/>
                 </div>
             </div>
         )
     }
 }
+
 export default Header

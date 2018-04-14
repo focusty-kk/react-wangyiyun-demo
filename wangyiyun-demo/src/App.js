@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {createStore} from 'redux';  // 需要使用redux的createStore方法创建store
+import {Provider} from 'react-redux';
+import indexReducer from './redux/indexReducer';
+
 import './App.css';
 import CoreLayout from './CoreLayout'
 
+const store = createStore(indexReducer);
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <CoreLayout/>
-      </div>
-    );
+        <Provider store={store}>
+            <div className="App">
+                <CoreLayout/>
+            </div>
+        </Provider>
+    )
   }
 }
 

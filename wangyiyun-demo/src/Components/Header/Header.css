@@ -1,8 +1,6 @@
-.Header{
-    height: 6rem;
-    background: #c21a0c;
+:root{
+    --linkColour:purple;
 }
-
-.Header .icon-bg{
-    /*background: #fff;*/
+a{
+    color:var(--linkColour);
 }

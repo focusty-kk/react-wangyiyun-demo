@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
+import CustomList from '../custom/CustomList';
 
 class Containers extends Component {
     render() {
         return (
             <div>
-                Containers
+                <CustomList/>
             </div>
         )
     }
