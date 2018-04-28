@@ -51,6 +51,7 @@ module.exports = {
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
+    
   ],
   output: {
     // Add /* filename */ comments to generated require()s in the output.
@@ -84,7 +85,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -115,7 +116,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -130,13 +131,10 @@ module.exports = {
           // "url" loader works like "file" loader except that it embeds assets
           // smaller than specified limit in bytes as data URLs to avoid requests.
           // A missing `test` is equivalent to a match.
+          
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            loader: require.resolve('url-loader'),
-            options: {
-              limit: 10000,
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
+            loader: require.resolve('url-loader')
           },
           // Process JS with Babel.
           {
@@ -144,7 +142,10 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+	            plugins: [
+		            ['import', {
+			            libraryName: 'antd', style: 'css'
+		            }]],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
@@ -158,21 +159,24 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
-            use: [
+              exclude: /node_modules|antd\.css/,
+              use: [
               require.resolve('style-loader'),
-              {
-                loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
+                {
+                    loader: require.resolve('css-loader'),
+                    options: {
+                        modules: true,   // 新增对css modules的支持
+                        localIdentName: '[name]__[local]__[hash:base64:5]', //
+                        importLoaders: 1,
+                    },
                 },
-              },
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
                   // Necessary for external CSS imports to work
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
-                  plugins: () => [
+                  plugins: (loader) => [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
                       browsers: [
@@ -186,8 +190,46 @@ module.exports = {
                   ],
                 },
               },
+
             ],
           },
+	        {
+		        test: /\.css$/,
+		        include: /node_modules|antd\.css/,
+		        use: [
+			        require.resolve('style-loader'),
+			        {
+				        loader: require.resolve('css-loader'),
+				        options: {
+					        importLoaders: 1,
+					        // 改动
+					        // modules: true,   // 新增对css modules的支持
+					        // localIdentName: '[name]__[local]__[hash:base64:5]', //
+				        },
+			        },
+			        {
+				        loader: require.resolve('postcss-loader'),
+				        options: {
+					        // Necessary for external CSS imports to work
+					        // https://github.com/facebookincubator/create-react-app/issues/2677
+					        ident: 'postcss',
+					        plugins: () => [
+						        require('postcss-flexbugs-fixes'),
+						        autoprefixer({
+							        browsers: [
+								        '>1%',
+								        'last 4 versions',
+								        'Firefox ESR',
+								        'not ie < 9', // React doesn't support IE8 anyway
+							        ],
+							        flexbox: 'no-2009',
+						        }),
+					        ],
+				        },
+			        },
+		        ],
+	        },
+	        
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.
@@ -243,6 +285,8 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+	
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

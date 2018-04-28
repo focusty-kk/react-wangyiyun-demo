@@ -19,7 +19,8 @@ class CustomItem extends Component {
         return (
             <li className="custom-item"
                 style={{
-                    textDecoration: this.props.completed ? 'line-through' : 'none'
+                    textDecoration: this.props.completed ? 'line-through' : 'none',
+                    backgroundColor: this.props.completed ? '#ff0000' : "yellow"
                 }}
                 onClick={() => {
                     console.log('习惯项点击 customItem click id', this.props.id, 'completed', this.props.completed);
