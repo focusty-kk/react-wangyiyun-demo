@@ -3,6 +3,7 @@ import { Divider,Input,Icon,Row,Col } from 'antd';
 import style from './Header.css'
 import common from '../../styles/common.css'
 
+
 const Search = Input.Search;
 
 class Header extends Component {
@@ -10,7 +11,10 @@ class Header extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			age: 999
+			age: 999,
+			searchResult:{
+				text:""
+			}
 		}
 	}
 	render() {
@@ -30,11 +34,11 @@ class Header extends Component {
 					<Row className={`${style.height_45}`}>
 						<Col span={8} >
 							<div className={`${common.flex_wrap_left} ${style.height_45}`}>
-								<img className={`${common.padding_left_250rem}`} src={require("../../asseat/icon/wangyi_yunyinyue_music.png")} />
+								<img className={`${common.padding_left_250rem}`} src={require("../../asseat/icon/wangyi_yunyinyue_music.png")} alt="" />
 								<span className={`${common.fz_18} ${common.font_weight600} ${common.margin_left_100rem} ${common.white_color}`}>网易云音乐</span>
 							</div>
 						</Col>
-						<Col span={8} >
+						<Col span={2} >
 							<div className={`${common.flex_wrap_left} ${style.height_45}`}>
 								<div className={`${common.display_inline_block} ${style.border_btn_left} ${style.box_shadow}`} style={{marginRight:"1px"}}>
 									<Icon type="left" className={`${common.font_weight600} ${common.white_color}`} />
@@ -47,9 +51,12 @@ class Header extends Component {
 						<Col span={8} >
 							<div className={`${common.flex_wrap_left} ${style.height_45}`}>
 								<Search
-									placeholder="input search text"
-									onSearch={value => console.log(value)}
-									style={{ width: 200 }}
+									placeholder="搜索音乐，歌手，歌词，用户"
+									// value={this.state.searchResult.text}
+									onSearch={(value)=>{
+										console.log(value)
+									}}
+									style={{width:"300px"}}
 								/>
 							</div>
 						</Col>
@@ -59,5 +66,14 @@ class Header extends Component {
 		)
 	}
 }
+
+// const mapStateToProps = (state) => {
+// 	return {
+// 		searchResult: state.searchResult
+// 	};
+// };
+
+//
+// Header = connect(mapStateToProps)(Header)
 
 export default Header

@@ -8,8 +8,11 @@ import AppBar from '../common/app-bar/AppBar';
 import CustomItem from './custom-item/CustomItem';
 // 引入用到的action
 import {addCustomItemAction} from '../../redux/custom/actions';
+//引入changeFooter
 // 引入connect函数用来生成Redux组件
 import {connect} from 'react-redux';
+
+//引入changeFooter
 
 class CustomList extends Component {
 

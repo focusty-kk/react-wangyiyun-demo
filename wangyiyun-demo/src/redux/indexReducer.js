@@ -3,7 +3,7 @@ import customListReducer from './custom/customListReducer'; // 引入习惯列�
 
 // 合并Reducer
 const appReducer = combineReducers({
-    customList: customListReducer   // 这里把state中的customList字段与customListReducer对应起来，相当于customListReducer就只在乎customList这个字段就行了
+    customList: customListReducer,   // 这里把state中的customList字段与customListReducer对应起来，相当于customListReducer就只在乎customList这个字段就行了
 });
 
 // 导出一个最终的appReducer
